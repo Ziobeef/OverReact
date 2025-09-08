@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Navbar from "./navbar";
 
 function Reqres() {
   const [data, setData] = useState([]);
@@ -64,6 +65,7 @@ function Reqres() {
   }, []);
   return (
     <>
+    <Navbar/>
       <form onSubmit={(e) => reqPost(e)}>
         <h5>
           <label>First Name</label>
