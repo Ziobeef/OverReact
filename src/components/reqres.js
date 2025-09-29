@@ -1,29 +1,29 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "./navbar";
+import { useHttpService } from "../services/httpsservice";
+import { Button, Modal } from "react-bootstrap";
 
 function Reqres() {
+  const [createShow, setcreateShow] = useState(false);
   const [data, setData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const { get, post } = useHttpService();
   const reqres = async () => {
-    const response = await axios.get("https://reqres.in/api/users", {
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    console.log(response.data.data);
-    setData(response.data.data);
+    const result = await get("users");
+    if (result.success) {
+      setData(result.response.data);
+    } else {
+      console.log(result.response);
+    }
   };
   const reqPost = async (e) => {
     e.preventDefault();
-    const response = await axios.post("https://reqres.in/api/users", formData, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "reqres-free-v1",
-      },
-    });
-    setData([response.data, ...data]);
+    const response = await post("users", formData);
+     console.log(response);
+  
+    setcreateShow(false);
+    setData([response.response.data, ...data]);
     console.log(response);
   };
   const reqPut = async (e) => {
@@ -61,25 +61,15 @@ function Reqres() {
     email: "",
   });
   useEffect(() => {
-    reqres();
+     reqres();
   }, []);
   return (
     <>
-    <Navbar/>
-      <form onSubmit={(e) => reqPost(e)}>
-        <h5>
-          <label>First Name</label>
-          <input type="text" value={formData.first_name} onChange={(e) => setformData({ ...formData, first_name: e.target.value })} />
-          <br />
-          <label>Last Name</label>
-          <input type="text" value={formData.last_name} onChange={(e) => setformData({ ...formData, last_name: e.target.value })} />
-          <br />
-          <label>Email</label>
-          <input type="text" value={formData.email} onChange={(e) => setformData({ ...formData, email: e.target.value })} />
-          <br />
-          <button type="submit">Submit</button>
-        </h5>
-      </form>
+      <Navbar />
+      <button class="btn btn-danger" onClick={() => setcreateShow(true)}>
+        Buat data disini!!
+      </button>
+      <br/>
       {data.map((item) => (
         <>
           <button type="button" onClick={() => reqDelete(item.id)}>
@@ -99,6 +89,35 @@ function Reqres() {
           </div>
         </>
       ))}
+      <Modal show={createShow} onHide={() => setcreateShow(false)}>
+        <form onSubmit={(e) => reqPost(e)}>
+          <Modal.Header>
+            <Modal.Title>Kriet Data</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <h5>
+              <label>First Name</label>
+              <input type="text" value={formData.first_name} onChange={(e) => setformData({ ...formData, first_name: e.target.value })} />
+              <br />
+              <label>Last Name</label>
+              <input type="text" value={formData.last_name} onChange={(e) => setformData({ ...formData, last_name: e.target.value })} />
+              <br />
+              <label>Email</label>
+              <input type="text" value={formData.email} onChange={(e) => setformData({ ...formData, email: e.target.value })} />
+            </h5>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setcreateShow(false)}>
+              Close
+            </Button>
+            <Button variant="danger" type="submit">
+              Save
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
     </>
   );
 }
