@@ -20,12 +20,13 @@ export const HttpService = ({ children }) => {
   };
   const post = async (urlPath, formData) => {
     try {
-      const response = await axios.get(apiUrl + "/" + urlPath, formData, {
+      const response = await axios.get(apiUrl + "/" + urlPath, {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": "reqres-free-v1",
-        },
+        },formData
       });
+      console.log(response);
       return { success: true, response: response.data };
     } catch (error) {
       console.log(error);

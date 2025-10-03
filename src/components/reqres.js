@@ -23,7 +23,7 @@ function Reqres() {
      console.log(response);
   
     setcreateShow(false);
-    setData([response.response.data, ...data]);
+    setData([formData, ...data]);
     console.log(response);
   };
   const reqPut = async (e) => {
