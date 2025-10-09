@@ -2,6 +2,7 @@ import React from "react";
 
 function Profile() {
   return (
+    <>
     <div>
       <div>
         <img className="blur" src="/profile.jpg" />
@@ -18,6 +19,23 @@ function Profile() {
         </div>
       </div>
     </div>
+    <div className="border border-5 my-5 container border-primary">
+      <div className="row">
+      <div className="col-6 border border-danger border-5 text-start">
+        <div>About Me</div>
+        <div>Aku suka makan ikan tambah yogurt</div>
+        <div>Aku suka makan ikan tambah yogurt</div>
+        <div>Aku suka makan ikan tambah yogurt</div>
+      </div>
+      <div className="col-6 border border-success border-5 text-center">
+        <div className="h-100 position-relative w-100 border border-warning border-5 d-flex justify-content-center ">
+        <img src="/omjoko.jpg" className="w-75"/>
+        <div className="position-absolute  left-5 border border-5" style={{marginTop:"550px"}}>my papi</div>
+        </div>
+      </div>
+      </div>
+    </div>
+    </>
   );
 }
 
