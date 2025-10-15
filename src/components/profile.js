@@ -15,8 +15,8 @@ function Profile() {
             <div className="fw-bold">
               <h1 >
                 Hello Im Zio
-                <RotatingText style={{width:"fit-content"}}
-                  texts={["Fullstack Developer", "Mobile Developer", "AI-Centric", "Ganteng","anjay"]}
+                <RotatingText style={{ width: "fit-content" }}
+                  texts={["Fullstack Developer", "Mobile Developer", "AI-Centric", "Ganteng", "anjay"]}
                   mainClassName="bg-danger px-5 rounded-3 d-inline-block mx-3"
                   staggerFrom={"last"}
                   initial={{ y: "100%" }}
@@ -29,8 +29,8 @@ function Profile() {
                   rotationInterval={2800}
                 />
               </h1>
-             Hi! I’m a 14-year-old programmer who loves turning ideas into reality through code. I enjoy learning new technologies, creating websites, and developing small projects that challenge my creativity and logic. Even though I’m still young, I’m passionate about improving my skills and growing into a developer who builds meaningful and innovative digital solutions.
-             
+              Hi! I’m a 14-year-old programmer who loves turning ideas into reality through code. I enjoy learning new technologies, creating websites, and developing small projects that challenge my creativity and logic. Even though I’m still young, I’m passionate about improving my skills and growing into a developer who builds meaningful and innovative digital solutions.
+
             </div>
             <div></div>
           </div>
@@ -49,24 +49,24 @@ function Profile() {
           <div className="col-6  text-center">
             <div className="h-100 position-relative w-100  d-flex justify-content-center ">
               <img src="/omjoko.jpg" className="w-75 rounded rounded-5" />
-              
+
             </div>
           </div>
         </div>
       </div>
-      <BackgroundGradient className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
-      <img
-        src="/product.webp"
-        alt="premium product"
-        className="object-contain rounded-lg"
-      />
-      <h3 className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-        Premium Product Name
-      </h3>
-      <p className="text-sm text-neutral-600 dark:text-neutral-400">
-        Beautiful description that sells the value, not just features.
-      </p>
-    </BackgroundGradient>
+      <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900">
+        <img
+          src="/product.webp"
+          alt="premium product"
+          className="object-contain rounded-lg"
+        />
+        <h3 className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
+          Premium Product Name
+        </h3>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          Beautiful description that sells the value, not just features.
+        </p>
+      </BackgroundGradient>
     </>
   );
 }
