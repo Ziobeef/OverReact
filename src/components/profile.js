@@ -7,7 +7,7 @@ function Profile() {
     <>
       <div>
         <div>
-          <img className="blur" src="/profile.jpg" />
+          <img className="blur" src="/profil.jpg" />
         </div>
         <div className="container my-5 position-absolute start-0 end-0" style={{ top: "30%" }}>
           <div className="text-center border rounded-5 p-4  text-white mx-5" style={{ opacity: 0.6, backgroundColor: "#0b3835" }}>
@@ -49,7 +49,7 @@ function Profile() {
             </div>
             <div className="col-6  text-center">
               <div className="h-100 position-relative w-100  d-flex justify-content-center ">
-                <img src="/omjoko.jpg" className="w-75 rounded rounded-5" />
+                <img src="/omjoko.jpeg" className="w-75 rounded rounded-5" />
               </div>
             </div>
           </div>
@@ -59,32 +59,32 @@ function Profile() {
         <div className="text-center col-3 ">
           <div className="mx-5">
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
-              <img src="/omjoko.jpg" className="w-75 rounded rounded-3  m-auto my-3" />
-              <h5>Jokowi Widodo</h5>
+              <img src="/javascript.png" className="w-75 rounded rounded-3  m-auto my-3" />
+              <h5>Java Script</h5>
             </BackgroundGradient>
           </div>
         </div>
         <div className="text-center col-3 ">
           <div className="mx-5">
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
-              <img src="/omjoko.jpg" className="w-75 rounded rounded-3  m-auto my-3" />
-              <h5>Jokowi Widodo</h5>
+              <img src="/laraveel.png" className="w-75 rounded rounded-3  m-auto my-3" />
+              <h5>Laravel</h5>
             </BackgroundGradient>
           </div>
         </div>
         <div className="text-center col-3 ">
           <div className="mx-5">
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
-              <img src="/omjoko.jpg" className="w-75 rounded rounded-3  m-auto my-3" />
-              <h5>Jokowi Widodo</h5>
+              <img src="/okk.png" className="w-75 rounded rounded-3  m-auto my-3" />
+              <h5>Tailwind</h5>
             </BackgroundGradient>
           </div>
         </div>
         <div className="text-center col-3 ">
           <div className="mx-5">
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
-              <img src="/omjoko.jpg" className="w-75 rounded rounded-3  m-auto my-3" />
-              <h5>Jokowi Widodo</h5>
+              <img src="/atom.png" className="w-75 rounded rounded-3  m-auto my-3" />
+              <h5>React.js</h5>
             </BackgroundGradient>
           </div>
         </div>
