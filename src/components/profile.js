@@ -10,7 +10,7 @@ function Profile() {
       <div style={{ backgroundColor: "#101f26" }}>
         <div>
           <div>
-            <img className="blur w-100" src="/profil.jpg" />
+            <img className="blur w-010" src="/profil.jpg" />
           </div>
           <div className="container my-5 position-absolute start-0 end-0  " style={{ top: "30%" }}>
             <div className="text-center border rounded-5 p-4  text-white mx-5" style={{ opacity: 0.6, backgroundColor: "#0b3835" }}>
@@ -96,68 +96,86 @@ function Profile() {
           <div className="d-flex justify-content-center">
             <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
               <li className="nav-item" role="presentation">
-                <button className={"nav-link" + (activeTab === "home" ? " active" : "")} onClick={() => setActiveTab("home")} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                <button
+                  className={"nav-link" + (activeTab === "home" ? " active" : "")}
+                  onClick={() => setActiveTab("home")}
+                  id="pills-home-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-home"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-home"
+                  aria-selected="true"
+                >
+                  Home
+                </button>
               </li>
               <li className="nav-item" role="presentation">
-                <button className={"nav-link" + (activeTab === "profile" ? " active" : "")} onClick={() => setActiveTab("profile")} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                <button
+                  className={"nav-link" + (activeTab === "profile" ? " active" : "")}
+                  onClick={() => setActiveTab("profile")}
+                  id="pills-profile-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-profile"
+                  aria-selected="false"
+                >
+                  Profile
+                </button>
               </li>
               <li className="nav-item" role="presentation">
-                <button className={"nav-link" + (activeTab === "contact" ? " active" : "")} onClick={() => setActiveTab("contact")} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                <button
+                  className={"nav-link" + (activeTab === "contact" ? " active" : "")}
+                  onClick={() => setActiveTab("contact")}
+                  id="pills-contact-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-contact"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-contact"
+                  aria-selected="false"
+                >
+                  Contact
+                </button>
               </li>
             </ul>
           </div>
           <div className="tab-content text-light" id="pills-tabContent">
-            <div className={"tab-pane fade" + (activeTab === "home" ? " show active" : "")} id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">1</div>
-            <div className={"tab-pane fade" + (activeTab === "profile" ? " show active" : "")} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">2</div>
-            <div className={"tab-pane fade" + (activeTab === "contact" ? " show active" : "")} id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">3</div>
+            <div className={"tab-pane fade" + (activeTab === "home" ? " show active" : "")} id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+              Arduino
+            </div>
+            <div className={"tab-pane fade" + (activeTab === "profile" ? " show active" : "")} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+              IOT
+            </div>
+            <div className={"tab-pane fade" + (activeTab === "contact" ? " show active" : "")} id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+              BALLSLLASLASDLKASDLAKSDLASKD
+            </div>
           </div>
         </div>
-        <div className="" style={{ backgroundColor: "#15161b" }}>
-          <div className="row py-4">
-            <div className="col-3 text-center py-3">
-              <div className="text-start mx-5">
-                <h3 className="text-light">Company</h3>
-                <h5 className="border-bottom w-50"></h5>
-                <h5 className="text-secondary">About Us</h5>
-                <h5 className="text-secondary">Our Services</h5>
-                <h5 className="text-secondary">Privac Polic</h5>
-                <h5 className="text-secondary">Affiliate Program</h5>
-              </div>
-            </div>
-            <div className="col-3 text-center py-3">
-              <div className="text-start mx-5">
-                <h3 className="text-light">Get Help</h3>
-                <h5 className="border-bottom w-50"></h5>
-                <h5 className="text-secondary">FAQ</h5>
-                <h5 className="text-secondary">Returns</h5>
-                <h5 className="text-secondary">Shipping</h5>
-                <h5 className="text-secondary">Order Status</h5>
-              </div>
-            </div>
-            <div className="col-3 text-center py-3">
-              <div className="text-start mx-5">
-                <h3 className="text-light">Online Shop</h3>
-                <h5 className="border-bottom w-75"></h5>
-                <h5 className="text-secondary">Watch</h5>
-                <h5 className="text-secondary">Shoes</h5>
-                <h5 className="text-secondary">Dress</h5>
-                <h5 className="text-secondary">Bag</h5>
-              </div>
-            </div>
-            <div className="col-3 text-center py-3">
-              <div className="text-start ">
-                <h3 className="text-light">Follow Us</h3>
-                <div className="border-bottom w-75"></div>
+        <div className="text-light" style={{ backgroundColor: "#15161b" }}>
+          <div className="row container border m-auto">
+            <div className="col-6">
+              <div className="w-50 m-auto ">
+                <h2>Get In Touch</h2>
+                <div>Got a question?</div>
+                <div> Want to discuss an idea? Let's start the conversation."</div>
                 <div className="row w-50">
-                  <div className="col-4">
-                    <img alt="youtube" src="/yutub.png" className="rounded rounded-3  m-auto my-3" />
-                  </div>
-                  <div className="col-4">
-                    <img alt="instagram" src="/ig.png" className="rounded rounded-3  m-auto my-3" />
-                  </div>
-                  <div className="col-4">
-                    <img alt="twitter" src="/x.png" className="rounded rounded-3  m-auto my-3" />
-                  </div>
+                  <div className="col-3 border">a</div>
+                  <div className="col-3 border">a</div>
+                  <div className="col-3 border">a</div>
+                  <div className="col-3 border">a</div>
+                </div>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="d-flex gap-5 w-50 ">
+                <div className=" border bg-danger">
+                  <div className="border">WhatsApp</div>
+                </div>
+                <div className=" ">
+                  <div className="border">Email</div>
                 </div>
               </div>
             </div>
