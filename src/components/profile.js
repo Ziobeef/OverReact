@@ -155,27 +155,64 @@ function Profile() {
           </div>
         </div>
         <div className="text-light" style={{ backgroundColor: "#15161b" }}>
-          <div className="row container border m-auto">
+          <div className="row container m-auto">
             <div className="col-6">
               <div className="w-50 m-auto ">
                 <h2>Get In Touch</h2>
                 <div>Got a question?</div>
                 <div> Want to discuss an idea? Let's start the conversation."</div>
-                <div className="row w-50">
-                  <div className="col-3 border">a</div>
-                  <div className="col-3 border">a</div>
-                  <div className="col-3 border">a</div>
-                  <div className="col-3 border">a</div>
+                <div className="row w-100">
+                  <div className="col-3 ">
+                    <a target="_blank" href="https://www.instagram.com/zioonacci">
+                      <img src="/ig.png" className="w-75 rounded rounded-3  m-auto my-3" />
+                    </a>
+                  </div>
+                  <div className="col-3 ">
+                    <a href="https://x.com">
+                      <img src="/x.png" className="w-75 rounded rounded-3  m-auto my-3" />
+                    </a>
+                  </div>
+                  <div className="col-3 ">
+                    <a href="https://youtube.com">
+                      <img src="/yutub.png" className="w-75 rounded rounded-3  m-auto my-3" />
+                    </a>
+                  </div>
+                  <div className="col-3 ">
+                    <a href="https://snapchat.com">
+                      <img src="/sc.png" className="w-75 rounded rounded-3  m-auto my-3" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="col-6">
               <div className="d-flex gap-5 w-50 ">
-                <div className=" border bg-danger">
-                  <div className="border">WhatsApp</div>
+                <div className="p-4">
+                  <a href="https://wa.me/62895345563425" target="_blank" style={{ textDecoration: "none" }}>
+                    <div className="p-2" style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
+                      <div className="w-100">
+                        <div className="w-100 " style={{height:"80px",overflow:"hidden"}}>
+                          <img src="/wa.png" className="w-100 d-block h-100" style={{objectFit:"cover"}} />
+                        </div>
+                        <div className="text-center">WA</div>
+                      </div>
+                    </div>
+                  </a>
                 </div>
-                <div className=" ">
-                  <div className="border">Email</div>
+
+                <div className="p-4" >
+                  <div style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
+                  <a href="https://wa.me/62895345563425" target="_blank" > 
+                    <div className="" >
+                      <div className="w-100">
+                        <div className="w-100 " style={{height:"80px",overflow:"hidden"}}>
+                          <img src="/gmail.png" className="w-100 d-block h-100" style={{objectFit:"cover"}} />
+                        </div>
+                        <div className="text-center">Gmail</div>
+                      </div>
+                    </div>
+                  </a>
+                  </div>
                 </div>
               </div>
             </div>
