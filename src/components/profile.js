@@ -186,33 +186,23 @@ function Profile() {
               </div>
             </div>
             <div className="col-6">
-              <div className="d-flex gap-5 w-50 ">
+              <div className="d-flex gap-4 w-50 ">
                 <div className="p-4">
                   <a href="https://wa.me/62895345563425" target="_blank" style={{ textDecoration: "none" }}>
-                    <div className="p-2" style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
-                      <div className="w-100">
-                        <div className="w-100 " style={{height:"80px",overflow:"hidden"}}>
-                          <img src="/wa.png" className="w-100 d-block h-100" style={{objectFit:"cover"}} />
-                        </div>
-                        <div className="text-center">WA</div>
-                      </div>
+                    <div className="p-2 text-center" style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
+                      <img src="/wa.png" height={100} width={100} className="d-block" style={{ objectFit: "cover" }} />
+                      <div className="text-center">Whatsapp</div>
                     </div>
                   </a>
                 </div>
 
-                <div className="p-4" >
-                  <div style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
-                  <a href="https://wa.me/62895345563425" target="_blank" > 
-                    <div className="" >
-                      <div className="w-100">
-                        <div className="w-100 " style={{height:"80px",overflow:"hidden"}}>
-                          <img src="/gmail.png" className="w-100 d-block h-100" style={{objectFit:"cover"}} />
-                        </div>
-                        <div className="text-center">Gmail</div>
-                      </div>
+                <div className="p-4">
+                  <a href="https://wa.me/62895345563425" target="_blank" style={{ textDecoration: "none" }} >
+                    <div className="p-2 text-center" style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
+                      <img src="/gmail.png" height={100} width={100} className="d-block" style={{ objectFit: "cover" }} />
+                      <div className="text-center">Gmail</div>
                     </div>
                   </a>
-                  </div>
                 </div>
               </div>
             </div>
