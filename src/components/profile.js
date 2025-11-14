@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import RotatingText from "./animation/textrotating/textrotating";
 import { BackgroundGradient } from "./animation/bggradient/bggradient";
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 function Profile() {
   const [activeTab, setActiveTab] = useState("BackEnd");
@@ -15,9 +15,9 @@ function Profile() {
       <div style={{ backgroundColor: "#101f26" }}>
         <div>
           <div>
-            <img className="blur w-010" src="/profil.jpg" />
+            <img className="blur w-100" src="/profil.jpg" />
           </div>
-          <div className="container my-5 position-absolute start-0 end-0  " style={{ top: "30%" }}>
+          <div className="container my-5 position-absolute mb-5 mb-lg-0 mb-md-0 start-0 end-0 " style={{ top: "30%" }}>
             <div className="text-center border rounded-5 p-4  text-white mx-5" style={{ opacity: 0.6, backgroundColor: "#0b3835" }}>
               <div className="fw-bold">
                 <h1>
@@ -44,10 +44,10 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="my-5 container rounded-5 p-5  w-100  ">
+        <div className="my-5 container rounded-5 p-5  w-100 mt-5 mt-lg-0 mt-md-0 pt-5 pt-lg-0 pt-md-0">
           <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
-            <div className="row">
-              <div className="col-6 text-start align-self-center px-5">
+            <div className="row gap-4 gap-md-4 gap-lg-0">
+              <div className="col-12 text-start align-self-center px-5 col-md-6 col-lg-6">
                 <h1>About Me</h1>
                 <div>
                   I am a 14-year-old student who is passionate about programming and technology. I started learning to code at a young age and quickly became interested in how software works behind the scenes. I have experience with several
@@ -55,7 +55,7 @@ function Profile() {
                   learn new things about coding and software development. My goal is to become a professional programmer who can build useful and innovative applications in the future.
                 </div>
               </div>
-              <div className="col-6  text-center">
+              <div className="col-12   col-md-6 col-lg-6 text-center">
                 <div className="h-100 position-relative w-100  d-flex justify-content-center ">
                   <img src="/omjoko.jpeg" className="w-75 rounded rounded-5" />
                 </div>
@@ -63,8 +63,8 @@ function Profile() {
             </div>
           </BackgroundGradient>
         </div>
-        <div className="row container mx-auto my-5 ">
-          <div className="text-center col-3 ">
+        <div className="row container mx-auto my-5 gap-4 gap-md-0 gap-lg-0">
+          <div className="text-center col-12 col-md-3 col-lg-3">
             <div className="mx-5">
               <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900  ">
                 <img src="/javascript.png" className="w-75 rounded rounded-3  m-auto my-3" />
@@ -72,7 +72,7 @@ function Profile() {
               </BackgroundGradient>
             </div>
           </div>
-          <div className="text-center col-3 ">
+          <div className="text-center col-12 col-md-3 col-lg-3 ">
             <div className="mx-5">
               <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
                 <img src="/laraveel.png" className="w-75 rounded rounded-3  m-auto my-3" />
@@ -80,7 +80,7 @@ function Profile() {
               </BackgroundGradient>
             </div>
           </div>
-          <div className="text-center col-3 ">
+          <div className="text-center col-12 col-md-3 col-lg-3">
             <div className="mx-5">
               <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
                 <img src="/okk.png" className="w-75 rounded rounded-3  m-auto my-3" />
@@ -88,7 +88,7 @@ function Profile() {
               </BackgroundGradient>
             </div>
           </div>
-          <div className="text-center col-3 ">
+          <div className="text-center col-12  col-md-3 col-lg-3">
             <div className="mx-5">
               <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
                 <img src="/atom.png" className="w-75 rounded rounded-3  m-auto my-3" />
@@ -178,14 +178,27 @@ function Profile() {
                           modules={[Pagination, Navigation]}
                           className="mySwiper"
                         >
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
-                          
+                          <SwiperSlide>
+                            <img src="/X.png" />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img src="/ig.png" />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img src="/okk.png" />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img src="/omjoko.png" />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img src="/profil.png" />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img src="/wa.png" />
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <img src="/yutub.png" />
+                          </SwiperSlide>
                         </Swiper>
                       </div>
                     </div>
