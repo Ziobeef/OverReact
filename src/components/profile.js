@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import RotatingText from "./animation/textrotating/textrotating";
 import { BackgroundGradient } from "./animation/bggradient/bggradient";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 function Profile() {
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState("BackEnd");
 
   return (
     <>
@@ -39,7 +44,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="my-5 container border-dark rounded-5 p-5  w-100  ">
+        <div className="my-5 container rounded-5 p-5  w-100  ">
           <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
             <div className="row">
               <div className="col-6 text-start align-self-center px-5">
@@ -97,8 +102,8 @@ function Profile() {
             <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
               <li className="nav-item" role="presentation">
                 <button
-                  className={"nav-link" + (activeTab === "home" ? " active" : "")}
-                  onClick={() => setActiveTab("home")}
+                  className={"nav-link" + (activeTab === "BackEnd" ? " active" : "")}
+                  onClick={() => setActiveTab("BackEnd")}
                   id="pills-home-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-home"
@@ -107,13 +112,13 @@ function Profile() {
                   aria-controls="pills-home"
                   aria-selected="true"
                 >
-                  Home
+                  BackEnd
                 </button>
               </li>
               <li className="nav-item" role="presentation">
                 <button
-                  className={"nav-link" + (activeTab === "profile" ? " active" : "")}
-                  onClick={() => setActiveTab("profile")}
+                  className={"nav-link" + (activeTab === "FrontEnd" ? " active" : "")}
+                  onClick={() => setActiveTab("FrontEnd")}
                   id="pills-profile-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-profile"
@@ -122,35 +127,82 @@ function Profile() {
                   aria-controls="pills-profile"
                   aria-selected="false"
                 >
-                  Profile
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className={"nav-link" + (activeTab === "contact" ? " active" : "")}
-                  onClick={() => setActiveTab("contact")}
-                  id="pills-contact-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-contact"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-contact"
-                  aria-selected="false"
-                >
-                  Contact
+                  FrontEnd
                 </button>
               </li>
             </ul>
           </div>
           <div className="tab-content text-light" id="pills-tabContent">
-            <div className={"tab-pane fade" + (activeTab === "home" ? " show active" : "")} id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-              Arduino
+            <div className={"tab-pane fade" + (activeTab === "BackEnd" ? " show active" : "")} id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+              <div className="row">
+                <div className="col-6">
+                  <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
+                    <div className="text-dark">
+                      <div className="border-success">Reqres Database</div>
+                      <div className="">Suspendisse sit amet neque egestas, porta neque id, fermentum nulla. Maecenas pretium eget risus sit ame</div>
+                      <div>
+                        <img src="/ig.png" className="w-25 m-auto mt-2" />
+                      </div>
+                    </div>
+                  </BackgroundGradient>
+                </div>
+                <div className="col-6">
+                  <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
+                    <div className="text-dark">
+                      <div className="border-success">Reqres Database</div>
+                      <div className="">Suspendisse sit amet neque egestas, porta neque id, fermentum nulla. Maecenas pretium eget risus sit ame</div>
+                      <div>
+                        <img src="/ig.png" className="w-25 m-auto mt-2" />
+                      </div>
+                    </div>
+                  </BackgroundGradient>
+                </div>
+              </div>
             </div>
-            <div className={"tab-pane fade" + (activeTab === "profile" ? " show active" : "")} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-              IOT
-            </div>
-            <div className={"tab-pane fade" + (activeTab === "contact" ? " show active" : "")} id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-              BALLSLLASLASDLKASDLAKSDLASKD
+            <div className={"tab-pane fade" + (activeTab === "FrontEnd" ? " show active" : "")} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+              <div className="row">
+                <div className="col-6">
+                  <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
+                    <div className="text-dark">
+                      <div className="border-success">Reqres Database</div>
+                      <div className="">Suspendisse sit amet neque egestas, porta neque id, fermentum nulla. Maecenas pretium eget risus sit ame</div>
+                      <div>
+                        <Swiper
+                          slidesPerView={1}
+                          spaceBetween={30}
+                          loop={true}
+                          pagination={{
+                            clickable: true,
+                          }}
+                          navigation={true}
+                          modules={[Pagination, Navigation]}
+                          className="mySwiper"
+                        >
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          <SwiperSlide><img src="/X.png" /></SwiperSlide>
+                          
+                        </Swiper>
+                      </div>
+                    </div>
+                  </BackgroundGradient>
+                </div>
+                <div className="col-6">
+                  <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-zinc-900 container ">
+                    <div className="text-dark">
+                      <div className="border-success">Reqres Database</div>
+                      <div className="">Suspendisse sit amet neque egestas, porta neque id, fermentum nulla. Maecenas pretium eget risus sit ame</div>
+                      <div>
+                        <img src="/X.png" className="w-25 m-auto mt-2" />
+                      </div>
+                    </div>
+                  </BackgroundGradient>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -197,7 +249,7 @@ function Profile() {
                 </div>
 
                 <div className="p-4">
-                  <a href="https://wa.me/62895345563425" target="_blank" style={{ textDecoration: "none" }} >
+                  <a href="https://wa.me/62895345563425" target="_blank" style={{ textDecoration: "none" }}>
                     <div className="p-2 text-center" style={{ backgroundColor: "#052e30", borderRadius: "10px", color: "white" }}>
                       <img src="/gmail.png" height={100} width={100} className="d-block" style={{ objectFit: "cover" }} />
                       <div className="text-center">Gmail</div>
