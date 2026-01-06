@@ -8,6 +8,7 @@ import Login from './components/login';
 import {BeforeLogin, Guard} from './components/guard';
 import { HttpService } from './services/httpsservice';
 import Profile from './components/profile';
+import Review from './components/review';
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
       <Route path="/home" element={<Home/>}/>
       <Route path="/user" element={<User/>}/>
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/review" element={<Review/>}/>
       <Route path="/reqres" element={<Guard><Reqres/></Guard>}/>
     </Routes>
       </HttpService>
