@@ -3,6 +3,15 @@ import React, { useEffect, useState } from "react";
 
 const Review = () => {
   const [joke, setJoke] = useState({});
+  const [gendername, setGendername] = useState("");
+  const [responseGender, setResponseGender] = useState({});
+  
+
+  const getGender = async (e) => {
+    const response = await axios.get("https://api.genderize.io/?name=" + gendername);
+    setResponseGender(response.data);
+    console.log(response);
+  };
   const getJokes = async (e) => {
     const response = await axios.get("https://official-joke-api.appspot.com/random_joke");
     setJoke(response.data);
@@ -12,6 +21,7 @@ const Review = () => {
     getJokes();
   }, []);
   return (
+   
     <div className="container border border-5">
       <div className="row">
         <div className="border border-3 border-danger col-12">
@@ -25,7 +35,19 @@ const Review = () => {
             <p>{joke.punchline}</p>
             <button className="btn btn-primary" onClick={getJokes}>Get New Joke</button>
         </div>
-        <div className="col-4 border border-3 border-success">Layer 2</div>
+        <div className="col-4 border border-3 border-success">
+          <label>Name</label>
+          <input type="text" value={gendername} onChange={(e) => setGendername(e.target.value)} />
+          <button className="btn btn-primary" onClick={getGender}>Get Gender</button>
+          {responseGender && 
+            <div>
+              <p>Gender: {responseGender.gender}</p>
+              <p>Probability: {responseGender.probability}</p>
+              </div>
+         
+
+      
+      }
       </div>
       <div className="row">
         <div className="col-4 border border-3 border-primary">Layer 3</div>
@@ -37,6 +59,8 @@ const Review = () => {
         <div className="col-8 border border-3 border-success">Layer 4</div>
       </div>
     </div>
+
+
   );
 };
 
