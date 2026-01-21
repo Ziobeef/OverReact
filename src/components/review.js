@@ -9,6 +9,8 @@ const Review = () => {
   const [responseAge, setResponseAge] = useState({});
   const [nationalityname, setNationalityname] = useState("");
   const [responseNationality, setResponseNationality] = useState({});
+  const [universitiesname, setUniversitiesname] = useState("");
+  const [responseUniversities, setResponseUniversities] = useState([]);
 
   const getGender = async (e) => {
     const response = await axios.get("https://api.genderize.io/?name=" + gendername);
@@ -23,12 +25,17 @@ const Review = () => {
   const getNationality = async (e) => {
     const response = await axios.get("https://api.nationalize.io/?name=" + nationalityname);
     setResponseNationality(response.data);
-    console.log(response);
+    console.log(responseNationality);
   };
   const getJokes = async (e) => {
     const response = await axios.get("https://official-joke-api.appspot.com/random_joke");
     setJoke(response.data);
     console.log(response);
+  };
+  const getUniversities = async (e) => {
+    const response = await axios.get("http://universities.hipolabs.com/search?name=" + universitiesname);
+    console.log(response);
+    setResponseUniversities(response.data);
   };
   useEffect(() => {
     getJokes();
@@ -87,16 +94,35 @@ const Review = () => {
             </button>
             {responseNationality && (
               <div>
-                {responseNationality?.country?.map((country, index) => (
+                {responseNationality?.country?.map((data, index) => (
                   <p key={index}>
-                    <img src={`https://flagsapi.com/${country.country_id}/shiny/64.png`} />
-                    Country: {country.country_id}, Probability: {country.probability}
+                    <img src={`https://flagsapi.com/${data.country_id}/shiny/64.png`} />
+                    Country: {data.country_id}, Probability: {data.probability} - {index}
                   </p>
                 ))}
               </div>
             )}
           </div>
-          <div className="col-8 border border-3 border-success">Layer 4</div>
+          <div className="col-8 border border-3 border-success">
+            <label>Universities</label>
+            <input type="text" value={universitiesname} onChange={(e) => setUniversitiesname(e.target.value)} />
+            <button className="btn btn-primary" onClick={getUniversities}>
+              Get Universities
+            </button>
+            {responseUniversities && (
+              <div>
+                {responseUniversities.map((university, index) => (
+                  <p key={index}>
+                    University:{university.name}
+                    <br />
+                    Web Page:{university?.web_pages?<a href={university.web_pages[0]} target="_blank">Visit Website</a>:"gada web nya jir"}
+                    <br/>
+                    Country: <img src={`https://flagsapi.com/${university.alpha_two_code}/shiny/64.png`} />
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
