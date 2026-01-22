@@ -11,6 +11,9 @@ const Review = () => {
   const [responseNationality, setResponseNationality] = useState({});
   const [universitiesname, setUniversitiesname] = useState("");
   const [responseUniversities, setResponseUniversities] = useState([]);
+  const [dogImageUrl, setDogImageUrl] = useState("https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg");
+  const [user, setUser] = useState(null);
+  const [adviceData, setAdviceData] = useState(null);
 
   const getGender = async (e) => {
     const response = await axios.get("https://api.genderize.io/?name=" + gendername);
@@ -37,9 +40,29 @@ const Review = () => {
     console.log(response);
     setResponseUniversities(response.data);
   };
+  const fetchDog = async () => {
+    const response = await fetch("https://dog.ceo/api/breeds/image/random");
+    const data = await response.json();
+    // PERBAIKAN: Seharusnya menggunakan useState untuk mengubah dogImageUrl
+
+    console.log("Variabel dogImageUrl berubah menjadi:", dogImageUrl);
+    setDogImageUrl(data.message);
+  };
+  const getAdvice = async () => {
+    const res = await fetch("https://api.adviceslip.com/advice");
+    const result = await res.json();
+    setAdviceData(result.slip);
+  };
   useEffect(() => {
     getJokes();
+    fetchDog();
+    getAdvice();
+
+    fetch("https://jsonplaceholder.typicode.com/users/1")
+      .then((res) => res.json())
+      .then((data) => setUser(data));
   }, []);
+  if (!user) return <p>Loading...</p>;
   return (
     <div className="container border border-5">
       <div className="row">
@@ -115,13 +138,38 @@ const Review = () => {
                   <p key={index}>
                     University:{university.name}
                     <br />
-                    Web Page:{university?.web_pages?<a href={university.web_pages[0]} target="_blank">Visit Website</a>:"gada web nya jir"}
-                    <br/>
+                    Web Page:
+                    {university?.web_pages ? (
+                      <a href={university.web_pages[0]} target="_blank">
+                        Visit Website
+                      </a>
+                    ) : (
+                      "gada web nya jir"
+                    )}
+                    <br />
                     Country: <img src={`https://flagsapi.com/${university.alpha_two_code}/shiny/64.png`} />
                   </p>
                 ))}
               </div>
             )}
+          </div>
+          <div style={{ border: "1px solid black", padding: "20px", margin: "10px" }}>
+            <h2>1. Dog Gallery (Bug: Variabel vs State)</h2>
+            <img src={dogImageUrl} alt="Dog" style={{ width: "200px", height: "200px" }} />
+            <br />
+            <button onClick={fetchDog}>Ganti Foto Anjing</button>
+            <p>Tips: Perhatikan mengapa gambar tidak berubah meski console.log menunjukkan URL baru.</p>
+          </div>
+          <div style={{ border: "1px solid blue", padding: "20px", margin: "10px" }}>
+            <h2>2. User Profile (Bug: Typo Variabel)</h2>
+            <p>Nama: {user.name}</p>
+            <p>Username: {user.username}</p>
+            <p>Email: {user.email}</p>
+          </div>
+          <div style={{ border: "1px solid green", padding: "20px", margin: "10px" }}>
+            <h2>3. Advice Generator</h2>
+            <p>Nasihat Hari Ini: {adviceData?.advice}</p>
+            <button onClick={getAdvice}>Cari Nasihat</button>
           </div>
         </div>
       </div>
