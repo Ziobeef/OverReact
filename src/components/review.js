@@ -14,6 +14,7 @@ const Review = () => {
   const [dogImageUrl, setDogImageUrl] = useState("https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg");
   const [user, setUser] = useState(null);
   const [adviceData, setAdviceData] = useState(null);
+  const [count, setCount] = useState(0);
 
   const getGender = async (e) => {
     const response = await axios.get("https://api.genderize.io/?name=" + gendername);
@@ -53,6 +54,10 @@ const Review = () => {
     const result = await res.json();
     setAdviceData(result.slip);
   };
+  const tambah = () => {
+    setCount((count = count + 1));
+  };
+
   useEffect(() => {
     getJokes();
     fetchDog();
@@ -170,6 +175,11 @@ const Review = () => {
             <h2>3. Advice Generator</h2>
             <p>Nasihat Hari Ini: {adviceData?.advice}</p>
             <button onClick={getAdvice}>Cari Nasihat</button>
+          </div>
+          <div style={{ border: "1px solid red", padding: "20px", margin: "10px" }}>
+            <h2>8. Counter (Bug: Assignment Error)</h2>
+            <p>Angka: {count}</p>
+            <button onClick={tambah}>Tambah</button>
           </div>
         </div>
       </div>
