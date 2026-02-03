@@ -13,8 +13,11 @@ const Review = () => {
   const [responseUniversities, setResponseUniversities] = useState([]);
   const [dogImageUrl, setDogImageUrl] = useState("https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg");
   const [user, setUser] = useState(null);
-  const [adviceData, setAdviceData] = useState(null);
   const [count, setCount] = useState(0);
+  const [fact, setFact] = useState([]);
+  const [unis, setUnis] = useState([]);
+  const [ip, setIp] = useState("Memeriksa...");
+  const [char, setChar] = useState(null);
 
   const getGender = async (e) => {
     const response = await axios.get("https://api.genderize.io/?name=" + gendername);
@@ -49,24 +52,43 @@ const Review = () => {
     console.log("Variabel dogImageUrl berubah menjadi:", dogImageUrl);
     setDogImageUrl(data.message);
   };
-  const getAdvice = async () => {
-    const res = await fetch("https://api.adviceslip.com/advice");
-    const result = await res.json();
-    setAdviceData(result.slip);
-  };
+
   const tambah = () => {
-    setCount((count = count + 1));
+    setCount(count + 1);
+  };
+  
+const loadChar = async () => {
+    const res = await fetch("https://rickandmortyapi.com/api/character/1");
+    const data = await res.json();
+    setChar(data);
+  console.log(data);
+  };
+  const loadUnis = async () => {
+    const res = await fetch("http://universities.hipolabs.com/search?country=Indonesia");
+    const data = await res.json();
+    setUnis(data.slice(0, 5));
+  };
+  const getFact = async () => {
+    const res = await fetch("https://catfact.ninja/fact");
+    const data = await res.json();
+    // BUG: API ini mengembalikan { "fact": "...", "length": 10 }
+    setFact(data.length);
+    console.log(data);
   };
 
   useEffect(() => {
     getJokes();
     fetchDog();
-    getAdvice();
 
     fetch("https://jsonplaceholder.typicode.com/users/1")
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);
+  useEffect(() => {
+    fetch("https://api.ipify.org?format=json")
+      .then((res) => res.json())
+      .then((data) => setIp(data.ip));
+  }, [ip]); //HINT
   if (!user) return <p>Loading...</p>;
   return (
     <div className="container border border-5">
@@ -171,16 +193,37 @@ const Review = () => {
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
           </div>
-          <div style={{ border: "1px solid green", padding: "20px", margin: "10px" }}>
-            <h2>3. Advice Generator</h2>
-            <p>Nasihat Hari Ini: {adviceData?.advice}</p>
-            <button onClick={getAdvice}>Cari Nasihat</button>
-          </div>
+
           <div style={{ border: "1px solid red", padding: "20px", margin: "10px" }}>
             <h2>8. Counter (Bug: Assignment Error)</h2>
             <p>Angka: {count}</p>
             <button onClick={tambah}>Tambah</button>
           </div>
+
+          <div style={{ border: "1px solid brown", padding: "20px", margin: "10px" }}>
+            <h2>6. Uni List (Bug: Map on Null)</h2>
+            <button onClick={loadUnis}>Tampilkan Kampus</button>
+            <ul>
+              {unis.map((u, index) => (
+                <li key={index}>{u.name}</li>
+              ))}
+            </ul>
+          </div>
+          <div style={{ border: "2px solid pink", padding: "20px", margin: "10px" }}>
+            <h2>14. Fakta Kucing (Bug: Wrong Property)</h2>
+            <p>{fact || "Klik tombol untuk fakta"}</p>
+            <button onClick={getFact}>Ambil Fakta</button>
+          </div>
+          <div style={{ border: "2px solid black", padding: "20px", margin: "10px" }}>
+            <h2>15. Cek IP (Bug: Dependency Loop)</h2>
+            <p>IP Anda: {ip}</p>
+          </div>
+          
+<div style={{ border: '2px solid green', padding: '20px', margin: '10px' }}>
+      <h2>16. Nama Karakter (Bug: Rendering Object)</h2>
+      <button onClick={loadChar}>Load Character</button>
+      <p>Nama: {char?.name}</p> 
+    </div>
         </div>
       </div>
     </div>
