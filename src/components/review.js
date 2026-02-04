@@ -18,6 +18,12 @@ const Review = () => {
   const [unis, setUnis] = useState([]);
   const [ip, setIp] = useState("Memeriksa...");
   const [char, setChar] = useState(null);
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("Menunggu...");
+  const postId = 10;
+  const [name, setName] = useState("Budi");
+  const [response, setResponse] = useState(null);
 
   const getGender = async (e) => {
     const response = await axios.get("https://api.genderize.io/?name=" + gendername);
@@ -56,12 +62,12 @@ const Review = () => {
   const tambah = () => {
     setCount(count + 1);
   };
-  
-const loadChar = async () => {
+
+  const loadChar = async () => {
     const res = await fetch("https://rickandmortyapi.com/api/character/1");
     const data = await res.json();
     setChar(data);
-  console.log(data);
+    console.log(data);
   };
   const loadUnis = async () => {
     const res = await fetch("http://universities.hipolabs.com/search?country=Indonesia");
@@ -74,6 +80,50 @@ const loadChar = async () => {
     // BUG: API ini mengembalikan { "fact": "...", "length": 10 }
     setFact(data.length);
     console.log(data);
+  };
+
+  const handleSubmit = async () => {
+    const newPost = {
+      title: title,
+      body: "Isi konten...",
+      userId: 1,
+    };
+    console.log(newPost);
+    console.log(JSON.stringify(newPost));
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      body: JSON.stringify(newPost),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const data = await res.json();
+    setMessage(`Berhasil dibuat! ID Postingan: ${data.id}`);
+    console.log(data);
+  };
+  const handleDelete = async () => {
+    const url = `https://jsonplaceholder.typicode.com/posts/${postId}`;
+    try {
+      await fetch(url, { method: "DELETE" });
+      setStatus("Berhasil dihapus! (Cek Network Tab)");
+    } catch (error) {
+      setStatus("Gagal menghapus.");
+    }
+  };
+  const handleUpdate = async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users/1", {
+      method: "PUT",
+
+      body: JSON.stringify({
+        id: 1,
+
+        name: name,
+      }),
+    });
+
+    const result = await res.json();
+
+    setResponse(result);
   };
 
   useEffect(() => {
@@ -218,12 +268,36 @@ const loadChar = async () => {
             <h2>15. Cek IP (Bug: Dependency Loop)</h2>
             <p>IP Anda: {ip}</p>
           </div>
-          
-<div style={{ border: '2px solid green', padding: '20px', margin: '10px' }}>
-      <h2>16. Nama Karakter (Bug: Rendering Object)</h2>
-      <button onClick={loadChar}>Load Character</button>
-      <p>Nama: {char?.name}</p> 
-    </div>
+
+          <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+            <h2>16. Nama Karakter (Bug: Rendering Object)</h2>
+            <button onClick={loadChar}>Load Character</button>
+            <p>Nama: {char?.name}</p>
+          </div>
+
+          <div style={{ border: "2px solid blue", padding: "20px", margin: "10px" }}>
+            <h2>29. Tambah Postingan (Bug: Raw Object)</h2>
+            <input type="text" placeholder="Judul Postingan" onChange={(e) => setTitle(e.target.value)} />
+            <button onClick={handleSubmit}>Kirim (POST)</button>
+            <p>{message}</p>
+          </div>
+          <div style={{ border: "2px solid red", padding: "20px", margin: "10px" }}>
+            <h2>30. Hapus Postingan (Bug: String URL)</h2>
+            <p>Target ID: {postId}</p>
+            <button onClick={handleDelete}>Hapus Data (DELETE)</button>
+            <p>Status: {status}</p>
+            <small>Tips: Jika URL salah, biasanya tidak terjadi apa-apa atau 404.</small>
+          </div>
+          <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+            <h2>31. Update Nama (Bug: Missing Headers)</h2>
+            <input value={name} onChange={(e) => setName(e.target.value)} />
+            <button onClick={handleUpdate}>Update (PUT)</button>
+            <p>
+              Hasil dari Server: <br />
+              {/* Jika bug ada, biasanya nama tidak berubah di sini atau object kosong */}
+              <pre>{JSON.stringify(response, null, 2)}</pre>
+            </p>
+          </div>
         </div>
       </div>
     </div>
