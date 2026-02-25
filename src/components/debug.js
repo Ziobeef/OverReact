@@ -27,6 +27,12 @@ const Debug = () => {
   const [pemenang, setPemenang] = useState();
   const [count, setCount] = useState(0);
   const max = 5;
+  const [newstatus, setNewStatus] = useState("Data Aman");
+  const hewan = ["Kucing", "Anjing", "Burung"];
+  const [index, setIndex] = useState(0);
+  const [minHarga, setMinHarga] = useState(0);
+  const [maxHarga, setMaxHarga] = useState(0);
+  const [statusharga, setStatusHarga] = useState("");
 
   const handleDelete = async () => {
     const res = await fetch(`https://jsonplaceholder.typicode.com/users/1`, {
@@ -39,6 +45,29 @@ const Debug = () => {
       alert("Gagal! API butuh ID (angka), bukan Nama.");
     }
   };
+  const cariBarang = () => {
+    if (minHarga > maxHarga) {
+      setStatus("Error: Harga Minimal tidak boleh lebih mahal dari Harga Maksimal!");
+    }
+    setStatus(`Mencari barang dari harga Rp ${minHarga} sampai Rp ${maxHarga}...`);
+  };
+  const nextBenda = () => {
+    if (index < hewan.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+
+  const prevBenda = () => {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
+  };
+  const hapusData = () => {
+    const yakin = window.confirm("Yakin mau hapus data ini?");
+    yakin ? setStatus("Data Terhapus!") : setStatus("Data Aman!");
+    console.log(yakin);
+  };
+
   const hitungLuas = (s) => {
     const hasil = s * s;
     return hasil;
@@ -257,6 +286,29 @@ const Debug = () => {
         <h1>Angka: {count}</h1>
         <button onClick={tambah}>Tambah</button>
         <p style={{ color: count > max ? "red" : "black" }}>{count > max ? "KELEBIHAN MUATAN!" : "Aman"}</p>
+      </div>
+      <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+        <h2>76. Konfirmasi Palsu (Bug: Missing If)</h2>
+        <h1>Status: {status}</h1>
+        <button onClick={hapusData}>Hapus Data Penting</button>
+        <p>Coba klik tombol, lalu pilih "Cancel". Data tetap terhapus kan?</p>
+      </div>
+
+      <div style={{ border: "2px solid orange", padding: "20px", margin: "10px" }}>
+        <h2>81. Galeri Blank (Bug: Out of Bounds)</h2>
+        <h1>Hewan: {hewan[index] || "ERROR: Data Tidak Ada!"}</h1>
+
+        <button onClick={prevBenda}>&lt; Mundur</button>
+        <button onClick={nextBenda}>Maju &gt;</button>
+
+        <p>Tekan "Maju" 3x. Apa yang terjadi?</p>
+      </div>
+      <div style={{ border: "2px solid teal", padding: "20px", margin: "10px" }}>
+        <h2>Contoh 1: Filter Harga (Guard Clause)</h2>
+        <input type="number" placeholder="Harga Min" onChange={(e) => setMinHarga(Number(e.target.value))} />
+        <input type="number" placeholder="Harga Max" onChange={(e) => setMaxHarga(Number(e.target.value))} />
+        <button onClick={cariBarang}>Cari</button>
+        <p>Status: {status}</p>
       </div>
     </>
   );
