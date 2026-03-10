@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { generateUUID } from "three/src/math/MathUtils";
+import { v4 as uuidv4 } from "uuid";
 const Debug = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,6 +35,60 @@ const Debug = () => {
   const [minHarga, setMinHarga] = useState(0);
   const [maxHarga, setMaxHarga] = useState(0);
   const [statusharga, setStatusHarga] = useState("");
+  const [pesan, setPesan] = useState("");
+  const [terkirim, setTerkirim] = useState(false);
+  const [nama, setNama] = useState("Budi");
+  const [teks, setTeks] = useState("");
+  const [murid, setMurid] = useState([
+    { id: 1, nama: "Andi" },
+    { id: 2, nama: "Budi" },
+    { id: 3, nama: "zio" },
+    { id: 4, nama: "louis" },
+  ]);
+  const [inputNama, setInputNama] = useState("");
+  const [catatan, setCatatan] = useState(["Beli telur"]);
+  const [teksNew, setTeksNew] = useState("");
+  const [hobi, setHobi] = useState(["Membaca", "Berenang"]);
+  const [inputHobi, setInputHobi] = useState("");
+
+  const tambahMurid = () => {
+    const newId = uuidv4();
+    const muridBaru = { id: newId, nama: inputNama };
+    setMurid([...murid, muridBaru]);
+    setInputNama("");
+  };
+
+  const tambahHobi = () => {
+    setHobi(inputHobi);
+    setInputHobi("");
+  };
+
+  const tambahCatatan = () => {
+    const dataBaru = [...catatan, teks];
+    setCatatan(dataBaru);
+    setTeks("");
+  };
+
+  const hapusMurid = (index) => {
+    // setMurid(murid.filter((m) => m.id !== id));
+    // setMurid(murid.findIndex((m) => m.id !== id));
+    murid.splice(index, 1);
+    setMurid([...murid]);
+  };
+
+  const kirimPesan = (e) => {
+    e.preventDefault();
+    setTerkirim(true);
+    setPesan("Pesan berhasil dikirim!");
+  };
+  const kirimData = (e) => {
+    e.preventDefault();
+    alert("Data Terkirim: " + teks);
+  };
+
+  const bersihkan = () => {
+    setTeks("");
+  };
 
   const handleDelete = async () => {
     const res = await fetch(`https://jsonplaceholder.typicode.com/users/1`, {
@@ -277,9 +333,8 @@ const Debug = () => {
         <h2>65. Pemenang Undian (Bug: Array Index)</h2>
         <p>Peserta: Ahmad, Budi, Cindy</p>
         <button onClick={acakPemenang}>Cari Pemenang</button>
-        <h1>Juara: {pemenang || "Error (Orang tidak ada!)"}</h1>
+        <h1>Juarindexa: {pemenang || "Error (Orang tidak ada!)"}</h1>
       </div>
-
       <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
         <h2>66. Batas Maksimal (Bug: Logic Operator)</h2>
         <p>Maksimal: {max}</p>
@@ -293,7 +348,6 @@ const Debug = () => {
         <button onClick={hapusData}>Hapus Data Penting</button>
         <p>Coba klik tombol, lalu pilih "Cancel". Data tetap terhapus kan?</p>
       </div>
-
       <div style={{ border: "2px solid orange", padding: "20px", margin: "10px" }}>
         <h2>81. Galeri Blank (Bug: Out of Bounds)</h2>
         <h1>Hewan: {hewan[index] || "ERROR: Data Tidak Ada!"}</h1>
@@ -310,6 +364,69 @@ const Debug = () => {
         <button onClick={cariBarang}>Cari</button>
         <p>Status: {status}</p>
       </div>
+      <div style={{ border: "2px solid red", padding: "20px", margin: "10px" }}>
+        <h2>87. Formulir Berkedip (Bug: Missing preventDefault)</h2>
+        <form onSubmit={kirimPesan}>
+          <input placeholder="Ketik lalu tekan Enter..." />
+          <button type="submit">Kirim</button>
+        </form>
+        <h1>{terkirim ? pesan : "Belum ada pesan"}</h1>
+        <small>Coba ketik dan tekan Enter. Layar akan berkedip dan tulisan kembali ke 'Belum ada pesan'.</small>
+      </div>
+      <div style={{ border: "2px solid blue", padding: "20px", margin: "10px" }}>
+        <h2>88. Keyboard Rusak? (Bug: Controlled Input)</h2>
+        <p>Coba ganti nama "Budi" menjadi namamu:</p>
+        <input type="text" value={nama} onChange={(e) => setNama(e.target.value)} />
+
+        <p>Halo, {nama}!</p>
+      </div>
+      <div style={{ border: "2px solid orange", padding: "20px", margin: "10px" }}>
+        <h2>90. Tombol Pengkhianat (Bug: Default Button Type)</h2>
+        <form onSubmit={kirimData}>
+          <input value={teks} onChange={(e) => setTeks(e.target.value)} />
+          <br />
+          <br />
+          <button type="button" onClick={bersihkan}>
+            Bersihkan Teks
+          </button>
+          <button type="submit" style={{ marginLeft: "10px" }}>
+            Kirim Data
+          </button>
+        </form>
+        <small>Ketik sesuatu, lalu klik "Bersihkan". Kenapa malah muncul Alert "Data Terkirim"?</small>
+      </div>
+      <div style={{ border: "2px solid teal", padding: "20px", margin: "10px" }}>
+        <h2>92. Tambah Murid (Bug: Duplicate ID)</h2>
+        <input value={inputNama} onChange={(e) => setInputNama(e.target.value)} />
+        <button onClick={tambahMurid}>Tambah</button>
+        <ul>
+          {murid.map((m, index) => (
+            <li key={m.id}>
+              {index + 1} - {m.nama}
+              <button onClick={() => hapusMurid(index)} style={{ marginLeft: "10px" }}>
+                Hapus
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+        <h2>96. Buku Catatan</h2>
+        <input value={teks} onChange={(e) => setTeks(e.target.value)} placeholder="Tulis catatan..." />
+        <button onClick={tambahCatatan}>Simpan</button>
+        <ul>
+          {catatan.map((c, i) => (
+            <li key={i}>{c === "" ? "[KOSONG]" : c}</li>
+          ))}
+        </ul>
+      </div>
+      <div style={{ border: "2px solid red", padding: "20px", margin: "10px" }}>
+        <h2>97. Tambah Hobi</h2>
+        <input value={inputHobi} onChange={(e) => setInputHobi(e.target.value)} />
+        <button onClick={tambahHobi}>Tambah</button>
+        <ul>{Array.isArray(hobi) ? hobi.map((h, i) => <li key={i}>{h}</li>) : <p>Error: Data rusak!</p>}</ul>
+      </div>
+      ;
     </>
   );
 };
