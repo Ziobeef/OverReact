@@ -50,7 +50,28 @@ const Debug = () => {
   const [teksNew, setTeksNew] = useState("");
   const [hobi, setHobi] = useState(["Membaca", "Berenang"]);
   const [inputHobi, setInputHobi] = useState("");
+  const [kontak, setKontak] = useState([
+    { id: 1, nama: "Budi" },
+    { id: 2, nama: "Andi" },
+    { id: 3, nama: "Budi" },
+  ]);
+  const [tugas, setTugas] = useState([
+    { id: 1, nama: "PR Matematika", status: "Belum" },
+    { id: 2, nama: "Bereskan Kasur", status: "Belum" },
+  ]);
 
+  const selesaikanTugas = (idTarget) => {
+    const tugasSelesai = tugas.map((t) => {
+      return { ...t, status };
+    });
+
+    setTugas(tugasSelesai);
+  };
+
+  const hapusKontak = (idTarget) => {
+    const sisaKontak = kontak.filter((k) => k.id !== idTarget);
+    setKontak(sisaKontak);
+  };
   const tambahMurid = () => {
     const newId = uuidv4();
     const muridBaru = { id: newId, nama: inputNama };
@@ -59,7 +80,7 @@ const Debug = () => {
   };
 
   const tambahHobi = () => {
-    setHobi(inputHobi);
+    setHobi([...hobi, inputHobi]);
     setInputHobi("");
   };
 
@@ -425,6 +446,32 @@ const Debug = () => {
         <input value={inputHobi} onChange={(e) => setInputHobi(e.target.value)} />
         <button onClick={tambahHobi}>Tambah</button>
         <ul>{Array.isArray(hobi) ? hobi.map((h, i) => <li key={i}>{h}</li>) : <p>Error: Data rusak!</p>}</ul>
+      </div>
+      <div style={{ border: "2px solid blue", padding: "20px", margin: "10px" }}>
+        <h2>98. Daftar Kontak</h2>
+        <ul>
+          {kontak.map((k) => (
+            <li key={k.id}>
+              {k.nama}
+              <button onClick={() => hapusKontak(k.id)} style={{ marginLeft: "10px" }}>
+                Hapus
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style={{ border: "2px solid purple", padding: "20px", margin: "10px" }}>
+        <h2>Todo List </h2>
+        <ul>
+          {tugas.map((t) => (
+            <li key={t.id}>
+              {t.nama} [{t.status}]
+              <button onClick={() => selesaikanTugas(t.id)} style={{ marginLeft: "10px" }}>
+                Kerjakan
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
       ;
     </>
