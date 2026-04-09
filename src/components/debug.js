@@ -50,6 +50,7 @@ const Debug = () => {
   const [teksNew, setTeksNew] = useState("");
   const [hobi, setHobi] = useState(["Membaca", "Berenang"]);
   const [inputHobi, setInputHobi] = useState("");
+  
   const [kontak, setKontak] = useState([
     { id: 1, nama: "Budi" },
     { id: 2, nama: "Andi" },
@@ -59,6 +60,8 @@ const Debug = () => {
     { id: 1, nama: "PR Matematika", status: "Belum" },
     { id: 2, nama: "Bereskan Kasur", status: "Belum" },
   ]);
+  const [merek, setMerek] = useState([]);
+  const [inputMerek, setInputMerek] = useState([]);
 
   const selesaikanTugas = (idTarget) => {
     const tugasSelesai = tugas.map((t) => {
@@ -109,6 +112,10 @@ const Debug = () => {
 
   const bersihkan = () => {
     setTeks("");
+  };
+  const tambahMerek = () => {
+    setMerek([...merek, inputMerek]);
+    setInputMerek("");
   };
 
   const handleDelete = async () => {
@@ -473,6 +480,13 @@ const Debug = () => {
           ))}
         </ul>
       </div>
+       <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+            <h2>Tambah Merek</h2>
+            <input type="text" value={inputMerek} onChange={(e) => setInputMerek(e.target.value)} />
+            {merek.map((m, index) => (<div>{index + 1} - {m}</div>))}
+            <button onClick={tambahMerek}>Tambah</button>
+
+          </div>
       ;
     </>
   );

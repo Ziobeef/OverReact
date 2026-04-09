@@ -24,6 +24,7 @@ const Review = () => {
   const postId = 10;
   const [name, setName] = useState("Budi");
   const [response, setResponse] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   const getGender = async (e) => {
     const response = await axios.get("https://api.genderize.io/?name=" + gendername);
@@ -297,6 +298,11 @@ const Review = () => {
               {/* Jika bug ada, biasanya nama tidak berubah di sini atau object kosong */}
               <pre>{JSON.stringify(response, null, 2)}</pre>
             </p>
+          </div>
+          <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+            <h2>Input Realtime</h2>
+            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <p>output realtime: {inputValue}</p>
           </div>
         </div>
       </div>
