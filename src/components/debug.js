@@ -63,9 +63,9 @@ const Debug = () => {
   const [merek, setMerek] = useState(["Nike", "Adidas", "Puma"]);
   const [inputMerek, setInputMerek] = useState([]);
   const [game, setGame] = useState([
-    { id: 1, Game: "Fortnite" },
-    { id: 2, Game: "Roblox" },
-    { id: 3, Game: "PUBG" },
+    { id: 1, game: "Fortnite" },
+    { id: 2, game: "Roblox" },
+    { id: 3, game: "PUBG" },
   ]);
   const [inputGame, setInputGame] = useState([]);
   const selesaikanTugas = (idTarget) => {
@@ -264,8 +264,13 @@ const Debug = () => {
       setJenis("Ini Angka GENAP");
     }
   };
-  const tambahGame = () => {
-    setGame([...game, inputGame]);
+  const tambahGame = async () => {
+  const newGame = {
+      id: 1,
+      game: inputGame,
+    };
+   setGame([...game, newGame]);
+    console.log(game);
     setInputGame("");
   }
 
@@ -499,10 +504,10 @@ const Debug = () => {
         ))}
         <button onClick={tambahMerek}>Tambah</button>
       </div>
-      <div>
+      <div>nn
         <input type="text" value={inputGame} onChange={(e) => setInputGame(e.target.value)}/>
         {game.map ((m, index) => (
-          <div>{index + 1} - {m.name}</div>
+          <div>{index + 1} - {m.game}</div>
         ))}
         <button onClick={tambahGame}>Tambah</button>
       </div>
