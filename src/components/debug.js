@@ -50,7 +50,7 @@ const Debug = () => {
   const [teksNew, setTeksNew] = useState("");
   const [hobi, setHobi] = useState(["Membaca", "Berenang"]);
   const [inputHobi, setInputHobi] = useState("");
-  
+
   const [kontak, setKontak] = useState([
     { id: 1, nama: "Budi" },
     { id: 2, nama: "Andi" },
@@ -60,9 +60,14 @@ const Debug = () => {
     { id: 1, nama: "PR Matematika", status: "Belum" },
     { id: 2, nama: "Bereskan Kasur", status: "Belum" },
   ]);
-  const [merek, setMerek] = useState([]);
+  const [merek, setMerek] = useState(["Nike", "Adidas", "Puma"]);
   const [inputMerek, setInputMerek] = useState([]);
-
+  const [game, setGame] = useState([
+    { id: 1, Game: "Fortnite" },
+    { id: 2, Game: "Roblox" },
+    { id: 3, Game: "PUBG" },
+  ]);
+  const [inputGame, setInputGame] = useState([]);
   const selesaikanTugas = (idTarget) => {
     const tugasSelesai = tugas.map((t) => {
       return { ...t, status };
@@ -259,6 +264,10 @@ const Debug = () => {
       setJenis("Ini Angka GENAP");
     }
   };
+  const tambahGame = () => {
+    setGame([...game, inputGame]);
+    setInputGame("");
+  }
 
   return (
     <>
@@ -480,14 +489,24 @@ const Debug = () => {
           ))}
         </ul>
       </div>
-       <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
-            <h2>Tambah Merek</h2>
-            <input type="text" value={inputMerek} onChange={(e) => setInputMerek(e.target.value)} />
-            {merek.map((m, index) => (<div>{index + 1} - {m}</div>))}
-            <button onClick={tambahMerek}>Tambah</button>
-
+      <div style={{ border: "2px solid green", padding: "20px", margin: "10px" }}>
+        <h2>Tambah Merek</h2>
+        <input type="text" value={inputMerek} onChange={(e) => setInputMerek(e.target.value)} />
+        {merek.map((m, index) => (
+          <div>
+            {index + 1} - {m}
           </div>
-      ;
+        ))}
+        <button onClick={tambahMerek}>Tambah</button>
+      </div>
+      <div>
+        <input type="text" value={inputGame} onChange={(e) => setInputGame(e.target.value)}/>
+        {game.map ((m, index) => (
+          <div>{index + 1} - {m.name}</div>
+        ))}
+        <button onClick={tambahGame}>Tambah</button>
+      </div>
+      
     </>
   );
 };
