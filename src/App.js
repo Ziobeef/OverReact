@@ -10,6 +10,7 @@ import { HttpService } from './services/httpsservice';
 import Profile from './components/profile';
 import Review from './components/review';
 import Debug from './components/debug';
+import Crud from './components/crud';
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/review" element={<Review/>}/>
       <Route path="/debug" element={<Debug/>}/>
+      <Route path="/crud" element={<Crud/>}/>
       <Route path="/reqres" element={<Guard><Reqres/></Guard>}/>
     </Routes>
       </HttpService>

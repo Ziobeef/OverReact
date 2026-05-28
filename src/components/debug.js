@@ -442,7 +442,7 @@ const Debug = () => {
         <input value={inputNama} onChange={(e) => setInputNama(e.target.value)} />
         <button onClick={tambahMurid}>Tambah</button>
         <ul>
-          {murid.map((m, index) => (
+          {murid=((m, index) => (
             <li key={m.id}>
               {index + 1} - {m.nama}
               <button onClick={() => hapusMurid(index)} style={{ marginLeft: "10px" }}>
