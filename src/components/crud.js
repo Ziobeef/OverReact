@@ -24,7 +24,7 @@ function Crud() {
     <div>
       <div>
         <h1>CRUD Page</h1>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input type="text" value={title} onChange={(e) => setTitle (e.target.value)} />
         <input type="text" value={body} onChange={(e) => setBody(e.target.value)} />
         
         <button onClick={() => handleSubmit()}>Submit</button>
