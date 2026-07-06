@@ -11,6 +11,7 @@ import Profile from './components/profile';
 import Review from './components/review';
 import Debug from './components/debug';
 import Crud from './components/crud';
+import Testing from './components/testing';
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
       <Route path="/review" element={<Review/>}/>
       <Route path="/debug" element={<Debug/>}/>
       <Route path="/crud" element={<Crud/>}/>
+      <Route path="/testing" element={<Testing/>}/>
       <Route path="/reqres" element={<Guard><Reqres/></Guard>}/>
     </Routes>
       </HttpService>

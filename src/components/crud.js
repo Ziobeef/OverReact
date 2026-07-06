@@ -6,12 +6,18 @@ function Crud() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const handleSubmit = async () => {
+  const [nameu, setNameu] = useState("");
+  const [usernameu, setUsernameu] = useState("");
+  const [emailu, setEmailu] = useState("");
+  const [idu, setIdu] = useState("");
+  const handleSubmit = async (type) => {
+    if (type === 'create') {
     const response = await axios.post("https://jsonplaceholder.typicode.com/users", {
       name: name,
       username: username,
       email: email,
     });
+  
 
     setData([
       {
@@ -21,8 +27,20 @@ function Crud() {
       },
       ...data,
     ]);
+    } else if (type === 'update') {
+      const response = await axios.put(`https://jsonplaceholder.typicode.com/users/${idu}`, {
+        name: nameu,
+        username: usernameu,
+        email: emailu,
+      });
+      const index = data.findIndex((e) => e.id === idu);
+      if (index !== -1) {
+        const dataBaru = data.toSpliced(index, 1, response.data);
+        setData(dataBaru);
+      }
     console.log(response);
   };
+};  
   const getData = async () => {
     const response = await axios.get("https://jsonplaceholder.typicode.com/users");
     setData(response.data);
@@ -37,8 +55,15 @@ function Crud() {
       const dataBaru = data.toSpliced(index, 1);
       setData(dataBaru);
     }
+    
   };
+  const updateResp = async (c) => {
+    setNameu(c.name);
+    setUsernameu(c.username);
+    setEmailu(c.email);
+    setIdu(c.id);
 
+  }
   useEffect(() => {
     getData();
   }, []);
@@ -49,8 +74,12 @@ function Crud() {
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-
-        <button onClick={() => handleSubmit()}>Submit</button>
+        <button onClick={() => handleSubmit('create')}>Submit</button>
+        <br/>
+       <input type="text" value={nameu} onChange={(e) => setNameu(e.target.value)} className="border"/>
+        <input type="text" value={usernameu} onChange={(e) => setUsernameu(e.target.value)} className="border"/>
+        <input type="text" value={emailu} onChange={(e) => setEmailu(e.target.value)} className="border"/>
+        <button onClick={() => handleSubmit('update')}>Update</button>
         <tabel className="table">
           <thead>
             <tr>
@@ -68,6 +97,7 @@ function Crud() {
                 <button type="button" onClick={() => deleteResp(c.id)}>
                   Delete
                 </button>
+                <button type="button" onClick={() => updateResp(c)}>Update</button>
               </tr>
             ))}
           </tbody>
