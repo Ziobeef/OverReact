@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import { useHttpService } from "../services/httpsservice";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap"
 
 function Reqres() {
   const [createShow, setcreateShow] = useState(false);
@@ -17,6 +17,7 @@ function Reqres() {
       console.log(result.response);
     }
   };
+  
   const reqPost = async (e) => {
     e.preventDefault();
     const response = await post("users", formData);

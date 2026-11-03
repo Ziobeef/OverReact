@@ -11,7 +11,7 @@ function Guard({ children }) {
 function BeforeLogin({ children }) {
   const isLogin = localStorage.getItem("isLogin");
   if (isLogin === "true") {
-    return <Navigate to="/reqres" />;
+    return <Navigate to="/crud" />;
   }
   return children;
 }

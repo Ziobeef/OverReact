@@ -12,6 +12,9 @@ import Review from './components/review';
 import Debug from './components/debug';
 import Crud from './components/crud';
 import Testing from './components/testing';
+import Dev from './components/dev';
+import Identity from './components/identity';
+
 
 function App() {
   
@@ -28,6 +31,8 @@ function App() {
       <Route path="/crud" element={<Crud/>}/>
       <Route path="/testing" element={<Testing/>}/>
       <Route path="/reqres" element={<Guard><Reqres/></Guard>}/>
+      <Route path="/dev" element={<Dev/>}/>
+      <Route path="/identity" element={<Identity/>}/>
     </Routes>
       </HttpService>
     </BrowserRouter>
