@@ -14,11 +14,14 @@ import Crud from './components/crud';
 import Testing from './components/testing';
 import Dev from './components/dev';
 import Identity from './components/identity';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 
 
 function App() {
-  
+  const queryClient = new QueryClient();
   return (
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
     <HttpService>
     <Routes>
@@ -36,6 +39,7 @@ function App() {
     </Routes>
       </HttpService>
     </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

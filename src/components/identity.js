@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function Identity() {
   const [data, setData] = React.useState([]);
@@ -15,62 +17,93 @@ function Identity() {
   const [genderl, setGenderl] = React.useState("");
 
   const handleForm = async (type) => {
-    if (type === "create") {
-      const response = await axios.post("https://sheetdb.io/api/v1/uthxirp5ujyfe", {
-        data: {
-          id: id,
-          name: name,
-          address: address,
-          age: age,
-          gender: gender,
-        },
-      });
-
-      if (response.status === 201) {
-        setData([
+    try {
+      if (type === "create") {
+        const response = await axios.post(
+          "https://sheetdb.io/api/v1/uthxirp5ujyfe",
           {
-            id: response.data.id,
-            name: response.data.name,
-            address: response.data.address,
-            age: response.data.age,
-            gender: response.data.gender,
+            data: {
+              id: id,
+              name: name,
+              address: address,
+              age: age,
+              gender: gender,
+            },
           },
-        ]);
+          toast.success("Data berhasil dianukan!"),
+        );
+
+        if (response.status === 201) {
+          setData([
+            {
+              id: response.data.id,
+              name: response.data.name,
+              address: response.data.address,
+              age: response.data.age,
+              gender: response.data.gender,
+            },
+          ]);
+          getData();
+        } else {
+          return alert("Failed to create data");
+        }
+      } else if (type === "update") {
+        const response = await axios.put(`https://sheetdb.io/api/v1/uthxirp5ujyfe/id/${idl}`, {
+          id: idl,
+          name: namel,
+          address: addressl,
+          age: agel,
+          gender: genderl,
+        });
+
         getData();
-      } else {
-        return alert("Failed to create data");
       }
-    } else if (type === "update") {
-      const response = await axios.put(`https://sheetdb.io/api/v1/uthxirp5ujyfe/id/${idl}`, {
-        id: idl,
-        name: namel,
-        address: addressl,
-        age: agel,
-        gender: genderl,
-      });
-      // const index = data.findIndex((e) => e.id === idl);
-      // if (index !== -1) {
-      //   const dataBaru = data.toSpliced(index, 1, response.data);
-      // setData(dataBaru);
-      // }
-       getData();
+    } catch (error) {}
+  };
+
+  const getData = async () => {
+    try {
+      const response = await axios.get("https://sheetdb.io/api/v1/uthxirp5ujyfe");
+      // setData(response.data);
+      const result = await response.data;
+       console.log(response);
+       return result;
+    } catch (error) {
+      toast.error(error.message);
+     
     }
   };
-  const getData = async () => {
-    const response = await axios.get("https://sheetdb.io/api/v1/uthxirp5ujyfe");
-    setData(response.data);
-  };
+  const { tanData, isLoading, isError, error } = useQuery({
+    queryKey: ["identity"],
+    queryFn: getData,
+  });
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
   const handleUpdate = async (identity) => {
-    setIdl(identity.id);
-    setNamel(identity.name);
-    setAddressl(identity.address);
-    setAgel(identity.age);
-    setGenderl(identity.gender);
-    console.log(identity);
+    try {
+      setIdl(identity.id);
+      setNamel(identity.name);
+      setAddressl(identity.address);
+      setAgel(identity.age);
+      setGenderl(identity.gender);
+      console.log(identity);
+    } catch (error) {}
   };
-  useEffect(() => {
-    getData();
-  }, []);
+  const handleDelete = async (identity) => {
+    try {
+      await axios.delete(`https://sheetdb.io/api/v1/uthxirp5ujyfe/id/${identity.id}`);
+      getData();
+    } catch (error) {}
+  };
+  const notify = () => toast("ANTEKKKKK");
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
   return (
     <>
       <h1>Account's Identity</h1>
@@ -109,7 +142,8 @@ function Identity() {
         <br />
         <button onClick={() => handleForm("update")}>Update Submit</button>
         <div></div>
-
+        <button onClick={notify}>Make me a toast</button>
+        <Toaster />
         <thead>
           <tr>
             <th>ID</th>
@@ -120,7 +154,7 @@ function Identity() {
           </tr>
         </thead>
         <tbody>
-          {data.map((identity, i) => (
+          {tanData?.map((identity, i) => (
             <tr>
               <td>{identity.id}</td>
               <td>{identity.name}</td>
@@ -129,6 +163,9 @@ function Identity() {
               <td>{identity.gender}</td>
               <button type="button" onClick={() => handleUpdate(identity)}>
                 Update
+              </button>
+              <button type="buttton" onClick={() => handleDelete(identity)}>
+                Delete
               </button>
             </tr>
           ))}
